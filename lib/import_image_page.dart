@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nature_finder/ui/home_view.dart';
 
 class ImportImagePage extends StatefulWidget {
   const ImportImagePage({super.key});
@@ -37,9 +38,10 @@ class _ImportImagePageState extends State<ImportImagePage> {
             flex: 5,
             child: GestureDetector(
               child: Container(
+                  width: MediaQuery.of(context).size.width,
                   color: Colors.grey[100],
                   child: imageFile != null
-                      ? Image.file(File(imageFile!.path))
+                      ? Image.file(File(imageFile!.path), fit: BoxFit.cover)
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -50,21 +52,54 @@ class _ImportImagePageState extends State<ImportImagePage> {
               onTap: selectFile,
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 40.0),
+          Icon(Icons.more_horiz),
+          const SizedBox(height: 40.0),
           Expanded(
               flex: 4,
               child: Column(
                 children: [
-                  MaterialButton(
-                    onPressed: () {},
-                    child: Text('Upload your photo'),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 40.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.green,
+                        ),
+                        borderRadius: BorderRadius.circular(24.0)),
+                    child: MaterialButton(
+                      onPressed: selectFile,
+                      child: const Text('Upload your photo'),
+                    ),
                   ),
-                  SizedBox(height: 24.0),
-                  MaterialButton(onPressed: () {}, child: Text('Take a photo')),
+                  const SizedBox(height: 56.0),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 40.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.green,
+                        ),
+                        borderRadius: BorderRadius.circular(24.0)),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => HomeView()));
+                      },
+                      child: const Text('Take a photo'),
+                    ),
+                  ),
                 ],
               )),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.green,
+          onPressed: () {},
+          label: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text('Check'),
+          )),
     );
   }
 }
