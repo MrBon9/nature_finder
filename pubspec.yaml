@@ -40,6 +40,7 @@ dependencies:
   camera: ^0.10.5+5
   exif: ^3.3.0
   image: ^4.1.3
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,13 @@ flutter:
   assets:
     - assets/
     - assets/models/
+    - assets/images/dandelion/
+    - assets/images/iris/
+    - assets/images/roses/
+    - assets/images/sunflower/
+    - assets/images/tulip/
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nature_finder/import_image_page.dart';
+import 'package:nature_finder/ui/import_image_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

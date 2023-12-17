@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nature_finder/ui/checking_result_page.dart';
 import 'package:nature_finder/ui/home_view.dart';
 
 class ImportImagePage extends StatefulWidget {
@@ -13,6 +14,7 @@ class ImportImagePage extends StatefulWidget {
 
 class _ImportImagePageState extends State<ImportImagePage> {
   File? imageFile;
+  int count = 0;
 
   void selectFile() async {
     XFile? file = await ImagePicker().pickImage(
@@ -21,6 +23,7 @@ class _ImportImagePageState extends State<ImportImagePage> {
     if (file != null) {
       setState(() {
         imageFile = File(file.path);
+        count = count + 1;
       });
     }
   }
@@ -86,7 +89,7 @@ class _ImportImagePageState extends State<ImportImagePage> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => HomeView()));
                       },
-                      child: const Text('Take a photo'),
+                      child: const Text('Real-time checking'),
                     ),
                   ),
                 ],
@@ -95,7 +98,15 @@ class _ImportImagePageState extends State<ImportImagePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.green,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CheckingResultPage(
+                          imagePath: imageFile!.path,
+                          count: count,
+                        )));
+          },
           label: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text('Check'),
